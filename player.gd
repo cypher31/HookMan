@@ -144,9 +144,10 @@ func _input(event):
 		
 		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
-		var bulletsHolder = get_node("bulletsHolder") #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
+		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
+		var bulletsHolder = get_node("bulletsHolder")
 		bulletsHolder.add_child(bullet)
-		bullet.set_pos(get_global_pos())
+		bullet.set_pos(bulletSpawnPoint)
 		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
 		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
 		bullet.look_at(relative_mouse_pos)

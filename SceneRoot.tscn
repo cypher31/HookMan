@@ -45,11 +45,13 @@ collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 2 )
 
-[node name="bulletsHolder" type="Node" parent="player"]
-
 [node name="playerSprite" type="Sprite" parent="player"]
 
 texture = ExtResource( 3 )
+
+[node name="bulletSpawnPoint" type="Position2D" parent="player/playerSprite"]
+
+transform/pos = Vector2( 0, 45 )
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="player" groups=[ "player" ]]
 
@@ -105,6 +107,8 @@ process_mode = 1
 wait_time = 1.5
 one_shot = true
 autostart = false
+
+[node name="bulletsHolder" type="Node" parent="player"]
 
 [node name="crossHair" type="Node2D" parent="."]
 
