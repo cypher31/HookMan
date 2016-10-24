@@ -53,6 +53,8 @@ texture = ExtResource( 3 )
 
 transform/pos = Vector2( 0, 45 )
 
+[node name="hookSpawnPoint" type="Position2D" parent="player/playerSprite"]
+
 [node name="playerCollisionShape" type="CollisionShape2D" parent="player" groups=[ "player" ]]
 
 transform/pos = Vector2( 0, 0.152079 )
@@ -82,8 +84,6 @@ drag_margin/bottom = 0.2
 
 [node name="timerHolder" type="Node" parent="player"]
 
-editor/display_folded = true
-
 [node name="Timer" type="Timer" parent="player/timerHolder"]
 
 process/pause_mode = 1
@@ -109,6 +109,8 @@ one_shot = true
 autostart = false
 
 [node name="bulletsHolder" type="Node" parent="player"]
+
+[node name="hookHolder" type="Node" parent="player"]
 
 [node name="crossHair" type="Node2D" parent="."]
 
