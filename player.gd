@@ -26,12 +26,10 @@ var prev_jump_pressed = false
 const BULLET_SPEED = 600
 const FIRE_TIME = .4
 var timer = 0
-var hook
+var bullet
 var teleportOn = false
 var destroyed = false
-var bulletTimeOut = false
-var bulletShot = false
-var shootReady = true
+
 
 onready var bullet_scene = preload("res://bullet_scene.tscn")
 
@@ -76,7 +74,7 @@ func _fixed_process(delta):
 	var motion = velocity * delta
 	
 	if(pull == true):
-		self.set_pos(hook.get_node("hookPosition").get_pos())
+		self.set_pos(bullet.get_node("hookPosition").get_pos())
 		pull = false
 		
 	#move and consume motion
@@ -139,22 +137,26 @@ func _fixed_process(delta):
 	get_node("playerSprite").look_at(relative_mouse_pos)
 	#move crosshair to mouse position
 
-
 func _input(event):
+
 	if (event.is_action_pressed("shoot") && not event.is_echo()):
 
-		hook = bullet_scene.instance()
+		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
 		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
-		var hookHolder = get_node("bulletsHolder")
-		hookHolder.add_child(hook)
-		hook.set_pos(bulletSpawnPoint)
-		hook.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
-		hook.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
-		hook.look_at(relative_mouse_pos)
-		
+		var bulletHolder = get_node("bulletsHolder")
+		bulletHolder.add_child(bullet)
+		bullet.set_pos(bulletSpawnPoint)
+		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
+		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
+		bullet.look_at(relative_mouse_pos)
 		teleportOn = true
-		shootReady = false
+
+
+	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true && bullet != null):
+		pull = true
+		teleportOn = false
+		bullet.queue_free()
 #		
 #		bullet = bullet_scene.instance()
 #		var playerPosition = get_node("playerSprite").get_pos()
@@ -166,12 +168,12 @@ func _input(event):
 #		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
 #		bullet.look_at(relative_mouse_pos)
 
+	
+
 	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
 		pull = true
 		teleportOn = false
-		bulletTimeOut = true
-		bulletShot = false
-		hook.queue_free()
+		bullet.queue_free()
 		#bullet.get_node("RigidBody2D").queue_free()
 #	if(event.is_action_pressed("shoot") && charging == false):
 #		charging = true
@@ -187,21 +189,12 @@ func _input(event):
 #		pull = true
 #		charging = false
 
-
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	set_process_input(true)
 	set_fixed_process(true)
-	
-	get_node("timerHolder/shootTimer").connect("timeout", self, "_shoot_Timer")
-	
 	pass
 
-func _shoot_Timer():
-	shootReady = true
-	print("working")
-	
-	pass
 
 
