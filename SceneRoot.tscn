@@ -47,7 +47,6 @@ script/script = ExtResource( 2 )
 
 [node name="playerSprite" type="Sprite" parent="player"]
 
-editor/display_folded = true
 texture = ExtResource( 3 )
 
 [node name="bulletSpawnPoint" type="Position2D" parent="player/playerSprite"]
@@ -85,6 +84,33 @@ drag_margin/bottom = 0.2
 
 [node name="timerHolder" type="Node" parent="player"]
 
+<<<<<<< HEAD
+=======
+[node name="Timer" type="Timer" parent="player/timerHolder"]
+
+process/pause_mode = 1
+process_mode = 1
+wait_time = 0.3
+one_shot = true
+autostart = false
+
+[node name="startCharge" type="Timer" parent="player/timerHolder"]
+
+process/pause_mode = 1
+process_mode = 1
+wait_time = 0.15
+one_shot = true
+autostart = false
+
+[node name="chargeTimer" type="Timer" parent="player/timerHolder"]
+
+process/pause_mode = 1
+process_mode = 1
+wait_time = 1.5
+one_shot = true
+autostart = false
+
+>>>>>>> parent of ea019b2... Nothing really
 [node name="bulletsHolder" type="Node" parent="player"]
 
 [node name="hookHolder" type="Node" parent="player"]

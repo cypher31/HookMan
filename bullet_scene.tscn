@@ -57,11 +57,23 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
+<<<<<<< HEAD
 [node name="bulletLifeTimer" type="Timer" parent="RigidBody2D"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
+=======
+[node name="hookPosition" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 3 )
+
+[node name="hookHolder" type="Position2D" parent="."]
+>>>>>>> parent of ea019b2... Nothing really
 
 

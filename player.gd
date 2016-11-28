@@ -29,9 +29,6 @@ var timer = 0
 var bullet
 var teleportOn = false
 var destroyed = false
-var bulletTimeOut = false
-var bulletShot = false
-var shootReady = true
 
 #Hook Variables
 var hookHolder
@@ -149,12 +146,30 @@ func _fixed_process(delta):
 		_createHook()
 
 func _input(event):
+<<<<<<< HEAD
 	if (event.is_action_pressed("shoot") && not event.is_echo() && shootReady == true):
 	
 		bullet = bullet_scene.instance()
 		
 		if(bullet != null):
 			bullet.queue_free()
+=======
+	if (event.is_action_pressed("shoot") && not event.is_echo() && teleportOn == false):
+		get_node("timerHolder/Timer").start()
+		get_node("timerHolder/startCharge").start()
+		
+		hook = bullet_scene.instance()
+		var playerPosition = get_node("playerSprite").get_pos()
+		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
+		var hookHolder = get_node("bulletsHolder")
+		hookHolder.add_child(hook)
+		hook.set_pos(bulletSpawnPoint)
+		hook.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
+		hook.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
+		hook.look_at(relative_mouse_pos)
+		get_node("timerHolder/Timer").start()
+		get_node("timerHolder/startCharge").start()
+>>>>>>> parent of ea019b2... Nothing really
 		
 		var playerPosition = get_node("playerSprite").get_pos()
 		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
@@ -166,12 +181,35 @@ func _input(event):
 		bullet.look_at(relative_mouse_pos)
 		teleportOn = true
 
+<<<<<<< HEAD
 
 	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true && bullet != null):
 		pull = true
 		teleportOn = false
 		bullet.queue_free()
 		hookUILive = false
+=======
+#		
+#		bullet = bullet_scene.instance()
+#		var playerPosition = get_node("playerSprite").get_pos()
+#		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
+#		var bulletsHolder = get_node("bulletsHolder")
+#		bulletsHolder.add_child(bullet)
+#		bullet.set_pos(bulletSpawnPoint)
+#		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
+#		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
+#		bullet.look_at(relative_mouse_pos)
+	
+	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
+		pull = true
+		teleportOn = false
+		hook.queue_free()
+		#bullet.get_node("RigidBody2D").queue_free()
+#	if(event.is_action_pressed("shoot") && charging == false):
+#		charging = true
+#		print("charging")
+#		get_node("timerHolder/chargeTimer").start()
+>>>>>>> parent of ea019b2... Nothing really
 #		
 #	if(event.is_action_released("shoot") && get_node("timerHolder/chargeTimer").get_time_left() > 0 && charging == true):
 #		print("not enough charge")
@@ -196,7 +234,11 @@ func _ready():
 	# Initialization here
 	set_process_input(true)
 	set_fixed_process(true)
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> parent of ea019b2... Nothing really
 	pass
 
 
