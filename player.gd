@@ -78,7 +78,6 @@ func _fixed_process(delta):
 	if(pull == true):
 		self.set_pos(hook.get_node("hookPosition").get_pos())
 		pull = false
-		hook.get_node("hookPosition").destroyed = false
 		
 	#move and consume motion
 	move(motion)
@@ -142,7 +141,7 @@ func _fixed_process(delta):
 
 
 func _input(event):
-	if (event.is_action_pressed("shoot") && not event.is_echo() && shootReady == true):
+	if (event.is_action_pressed("shoot") && not event.is_echo()):
 
 		hook = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
@@ -153,8 +152,6 @@ func _input(event):
 		hook.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
 		hook.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
 		hook.look_at(relative_mouse_pos)
-		
-		get_node("timerHolder/shootTimer").start()
 		
 		teleportOn = true
 		shootReady = false
@@ -169,7 +166,7 @@ func _input(event):
 #		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
 #		bullet.look_at(relative_mouse_pos)
 
-	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true && hook.get_node("hookPosition").destroyed == true):
+	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
 		pull = true
 		teleportOn = false
 		bulletTimeOut = true
