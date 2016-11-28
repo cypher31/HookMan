@@ -28,6 +28,7 @@ const FIRE_TIME = .4
 var timer = 0
 var bullet
 var teleportOn = false
+var canTeleport = false
 var destroyed = false
 
 
@@ -150,44 +151,14 @@ func _input(event):
 		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
 		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
 		bullet.look_at(relative_mouse_pos)
+		print(get_tree().get_nodes_in_group("bullet").size())
 		teleportOn = true
-
-
-	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true && bullet != null):
-		pull = true
-		teleportOn = false
-		bullet.queue_free()
-#		
-#		bullet = bullet_scene.instance()
-#		var playerPosition = get_node("playerSprite").get_pos()
-#		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
-#		var bulletsHolder = get_node("bulletsHolder")
-#		bulletsHolder.add_child(bullet)
-#		bullet.set_pos(bulletSpawnPoint)
-#		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
-#		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
-#		bullet.look_at(relative_mouse_pos)
-
-	
 
 	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
 		pull = true
 		teleportOn = false
+		canTeleport = false
 		bullet.queue_free()
-		#bullet.get_node("RigidBody2D").queue_free()
-#	if(event.is_action_pressed("shoot") && charging == false):
-#		charging = true
-#		print("charging")
-#		get_node("timerHolder/chargeTimer").start()
-#		
-#	if(event.is_action_released("shoot") && get_node("timerHolder/chargeTimer").get_time_left() > 0 && charging == true):
-#		print("not enough charge")
-#		charging = false
-#		
-#	if(event.is_action_released("shoot") && get_node("timerHolder/chargeTimer").get_time_left() <= 0 && charging == true):
-#		print("charge shot")
-#		pull = true
-#		charging = false
 
 func _ready():
 	# Called every time the node is added to the scene.

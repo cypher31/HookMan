@@ -30,12 +30,13 @@ collision/bounce = 0.0
 collision/layers = 3
 collision/mask = 3
 occluder/light_mask = 1
-tile_data = IntArray( 196620, 1, 196621, 1, 196622, 1, 196623, 1, 196634, 1, 262167, 1, 393244, 1, 458761, 1, 458762, 1, 458763, 1, 458764, 1, 458765, 1, 458766, 1, 458767, 1, 458768, 1, 458769, 1, 458770, 1, 458771, 1, 524312, 1, 524313, 1, 524314, 1, 524315, 1, 589847, 1, 589848, 1, 655380, 1, 655381, 1, 655382, 1, 655383, 1 )
+tile_data = IntArray( -720893, 1, -720892, 1, -720891, 1, -720890, 1, -720889, 1, -655359, 1, -655358, 1, -655353, 1, -655352, 1, -655351, 1, -655340, 1, -655333, 1, -655332, 1, -655331, 1, -655330, 1, -655329, 1, -655328, 1, -589823, 1, -589806, 1, -589805, 1, -589804, 1, -589803, 1, -589797, 1, -524287, 1, -524272, 1, -524271, 1, -524270, 1, -524269, 1, -524268, 1, -524267, 1, -524261, 1, -458751, 1, -458750, 1, -458742, 1, -458741, 1, -458740, 1, -458739, 1, -458738, 1, -458737, 1, -458727, 1, -458726, 1, -458725, 1, -393214, 1, -327678, 1, -196613, 1, -196612, 1, -196611, 1, -196610, 1, -262142, 1 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="player" type="KinematicBody2D" parent="."]
 
-transform/pos = Vector2( 551.661, 153.941 )
+editor/display_folded = true
+transform/pos = Vector2( 0.062561, -73.6703 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 3.14409, 0, 0, 2.96143, 0, 0.152079 )
@@ -98,13 +99,12 @@ autostart = false
 
 [node name="crossHair" type="Node2D" parent="."]
 
-editor/display_folded = true
 script/script = ExtResource( 4 )
 
 [node name="crossHairSprite" type="Sprite" parent="crossHair"]
 
-transform/pos = Vector2( 551.661, 153.941 )
-transform/scale = Vector2( 0.5, 0.5 )
+transform/pos = Vector2( 0.062561, -73.6703 )
+transform/scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 5 )
 flip_h = true
 flip_v = true
