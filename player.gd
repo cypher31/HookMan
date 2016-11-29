@@ -31,11 +31,12 @@ var teleportOn = false
 var canTeleport = false
 var destroyed = false
 
-
 onready var bullet_scene = preload("res://bullet_scene.tscn")
-
 onready var offset = Vector2(0, 0)
 onready var relative_mouse_pos = Vector2(0, 0)
+
+#Game Variables
+var gameOver = false
 
 func _fixed_process(delta):
 	#start timer
@@ -137,6 +138,16 @@ func _fixed_process(delta):
 	#have gun look at mouse location
 	get_node("playerSprite").look_at(relative_mouse_pos)
 	#move crosshair to mouse position
+	
+	#tile collision logic
+	#for this to work the tile actually needs to be touched, not the collision polygon attached to the tile
+	var collidingWith = get_collision_pos()
+	var tile = get_parent().get_node("TileMap").get_cellv(get_parent().get_node("TileMap").world_to_map(collidingWith))
+	
+	if(is_colliding()):
+		if(tile == 2):
+			self.queue_free()
+			gameOver = true
 
 func _input(event):
 
