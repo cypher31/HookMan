@@ -3,7 +3,7 @@ extends KinematicBody2D
 #Player constants
 #angle in degrees towards either side that player can consider floor
 const FLOOR_ANGLE_TOLERANCE = 40
-const GRAVITY = 2000
+const GRAVITY = 1500
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 200
 const WALK_FORCE = 600
@@ -93,7 +93,7 @@ func _fixed_process(delta):
 		var collidingWith = get_collision_pos()
 		var tile = get_parent().get_node("TileMap").get_cellv(get_parent().get_node("TileMap").world_to_map(collidingWith))
 		if(tile == 2):
-			self.queue_free()
+			get_tree().reload_current_scene()
 			gameOver = true
 		
 		if(rad2deg(acos(n.dot(Vector2(0, -1)))) < FLOOR_ANGLE_TOLERANCE):
