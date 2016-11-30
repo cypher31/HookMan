@@ -87,6 +87,15 @@ func _fixed_process(delta):
 	if(is_colliding()):
 		var n = get_collision_normal()
 		
+		#tile collision logic
+		#for this to work the tile actually needs to be touched, not the collision polygon attached to the tile
+		#also this has to come before the "slide" logic below (I think...)
+		var collidingWith = get_collision_pos()
+		var tile = get_parent().get_node("TileMap").get_cellv(get_parent().get_node("TileMap").world_to_map(collidingWith))
+		if(tile == 2):
+			self.queue_free()
+			gameOver = true
+		
 		if(rad2deg(acos(n.dot(Vector2(0, -1)))) < FLOOR_ANGLE_TOLERANCE):
 			#if angle to the up vectors is < agnle tolerance
 			#char is on the floor
@@ -139,15 +148,8 @@ func _fixed_process(delta):
 	get_node("playerSprite").look_at(relative_mouse_pos)
 	#move crosshair to mouse position
 	
-	#tile collision logic
-	#for this to work the tile actually needs to be touched, not the collision polygon attached to the tile
-	var collidingWith = get_collision_pos()
-	var tile = get_parent().get_node("TileMap").get_cellv(get_parent().get_node("TileMap").world_to_map(collidingWith))
-	
-	if(is_colliding()):
-		if(tile == 2):
-			self.queue_free()
-			gameOver = true
+
+
 
 func _input(event):
 

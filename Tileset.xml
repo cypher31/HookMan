@@ -13,7 +13,7 @@
 	</resource>
 	<resource type="ConvexPolygonShape2D" path="local://3">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="4"> 			-15.2005, -14.1594, 14.8695, -14.3342, 14.8695, 14.512, -15.3753, 14.8616 </vector2_array>
+		<vector2_array name="points" len="4"> 			-15.1783, -8.02213, 13.98, -8.02213, 14.8695, 14.512, -15.3753, 14.8616 </vector2_array>
 
 	</resource>
 	<main_resource>
@@ -40,7 +40,7 @@
 		<string name="2/name"> "Sprite1" </string>
 		<resource name="2/texture" external="0">  </resource>
 		<vector2 name="2/tex_offset"> 0, 0 </vector2>
-		<resource name="2/material"></resource>		<rect2 name="2/region"> 128, 160, 32, 32 </rect2>
+		<resource name="2/material"></resource>		<rect2 name="2/region"> 2000, 160, 32, 32 </rect2>
 		<vector2 name="2/occluder_offset"> 16, 16 </vector2>
 		<resource name="2/occluder"></resource>		<vector2 name="2/navigation_offset"> 16, 16 </vector2>
 		<resource name="2/navigation"></resource>		<vector2 name="2/shape_offset"> 16, 16 </vector2>
