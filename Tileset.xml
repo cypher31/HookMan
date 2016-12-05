@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="TileSet" subresource_count="5" version="2.1" version_name="Godot Engine v2.1.stable.official">
+<resource_file type="TileSet" subresource_count="6" version="2.1" version_name="Godot Engine v2.1.stable.official">
 	<ext_resource path="res://NES - Mega Man 2 - Wood Man Stage.tex" type="Texture" index="0"></ext_resource>
 	<resource type="ConvexPolygonShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
@@ -14,6 +14,11 @@
 	<resource type="ConvexPolygonShape2D" path="local://3">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			-15.1783, -8.02213, 13.98, -8.02213, 14.8695, 14.512, -15.3753, 14.8616 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://4">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-5.20222, -1.18685, 9.32622, -1.38056, 10.2948, 15.085, -6.36452, 14.6976 </vector2_array>
 
 	</resource>
 	<main_resource>
@@ -46,6 +51,16 @@
 		<resource name="2/navigation"></resource>		<vector2 name="2/shape_offset"> 16, 16 </vector2>
 		<array name="2/shapes" len="1" shared="false">
 			<resource  resource_type="Shape2D" path="local://3">  </resource>
+		</array>
+		<string name="3/name"> "Sprite2" </string>
+		<resource name="3/texture" external="0">  </resource>
+		<vector2 name="3/tex_offset"> 0, 0 </vector2>
+		<resource name="3/material"></resource>		<rect2 name="3/region"> 3000, 160, 32, 32 </rect2>
+		<vector2 name="3/occluder_offset"> 16, 16 </vector2>
+		<resource name="3/occluder"></resource>		<vector2 name="3/navigation_offset"> 16, 16 </vector2>
+		<resource name="3/navigation"></resource>		<vector2 name="3/shape_offset"> 16, 16 </vector2>
+		<array name="3/shapes" len="1" shared="false">
+			<resource  resource_type="Shape2D" path="local://4">  </resource>
 		</array>
 
 	</main_resource>

@@ -3,7 +3,7 @@ extends KinematicBody2D
 #Player constants
 #angle in degrees towards either side that player can consider floor
 const FLOOR_ANGLE_TOLERANCE = 40
-const GRAVITY = 1500
+const GRAVITY = 2000
 const WALK_MIN_SPEED = 10
 const WALK_MAX_SPEED = 200
 const WALK_FORCE = 600
@@ -74,10 +74,6 @@ func _fixed_process(delta):
 	
 	#integrate velocity into motion and move
 	var motion = velocity * delta
-	
-	if(pull == true):
-		self.set_pos(bullet.get_node("hookPosition").get_pos())
-		pull = false
 		
 	#move and consume motion
 	move(motion)
@@ -168,7 +164,7 @@ func _input(event):
 		teleportOn = true
 
 	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
-		pull = true
+		self.set_pos(bullet.get_node("hookPosition").get_pos())
 		teleportOn = false
 		canTeleport = false
 		bullet.queue_free()
