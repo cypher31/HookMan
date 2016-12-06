@@ -87,7 +87,7 @@ func _fixed_process(delta):
 		#for this to work the tile actually needs to be touched, not the collision polygon attached to the tile
 		#also this has to come before the "slide" logic below (I think...)
 		var collidingWith = get_collision_pos()
-		var tile = get_parent().get_node("TileMap").get_cellv(get_parent().get_node("TileMap").world_to_map(collidingWith))
+		var tile = get_node("/root/SceneRoot/TileMap").get_cellv(get_parent().get_node("/root/SceneRoot/TileMap").world_to_map(collidingWith))
 		if(tile == 2):
 			get_tree().reload_current_scene()
 			gameOver = true

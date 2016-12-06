@@ -12,8 +12,7 @@ onready var relative_mouse_pos = Vector2(0, 0)
 func _fixed_process(delta):
 	
 	#mouse position
-	offset = -get_viewport().get_canvas_transform().o # Get the offset
-	relative_mouse_pos = get_viewport().get_mouse_pos() + offset
+	relative_mouse_pos = get_global_mouse_pos()
 	#have gun look at mouse location
 	get_node("crossHairSprite").set_pos(relative_mouse_pos)
 	#move crosshair to mouse position
