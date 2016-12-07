@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://bulletBody.gd" type="Script" id=1]
 [ext_resource path="res://Bullet-Bill.tex" type="Texture" id=2]
@@ -8,10 +8,6 @@
 custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
-
-[sub_resource type="GDScript" id=2]
-
-script/source = "\nextends KinematicBody2D\n\nvar destroyed = false \n\nfunc _ready():\n\t\n\tpass\n\n\n"
 
 [node name="hook" type="Node2D" groups=[ "bullet" ]]
 
@@ -68,7 +64,6 @@ input/pickable = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
-script/script = SubResource( 2 )
 
 [node name="hookHolder" type="Position2D" parent="."]
 

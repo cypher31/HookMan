@@ -39,9 +39,6 @@ onready var relative_mouse_pos = Vector2(0, 0)
 var gameOver = false
 
 func _fixed_process(delta):
-	#start timer
-	#timer = get_node("Timer").get_time_left()
-	#create forces
 	var force = Vector2(0, GRAVITY)
 	
 	var walk_left = Input.is_action_pressed("move_left")
@@ -79,6 +76,7 @@ func _fixed_process(delta):
 	move(motion)
 	
 	var floor_velocity = Vector2()
+
 	
 	if(is_colliding()):
 		var n = get_collision_normal()
@@ -142,10 +140,7 @@ func _fixed_process(delta):
 	relative_mouse_pos = get_viewport().get_mouse_pos() * get_node("Camera2D").get_zoom() + offset
 	#have gun look at mouse location
 	get_node("playerSprite").look_at(relative_mouse_pos)
-	#move crosshair to mouse position
-	
-
-
+	#have gun look at mouse location
 
 func _input(event):
 
@@ -158,9 +153,8 @@ func _input(event):
 		bulletHolder.add_child(bullet)
 		bullet.set_pos(bulletSpawnPoint)
 		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
-		bullet.get_node("RigidBody2D/Sprite").set_rot(deg2rad(90))
+		bullet.get_node("RigidBody2D").set_rot(deg2rad(90))
 		bullet.look_at(relative_mouse_pos)
-		print(get_tree().get_nodes_in_group("bullet").size())
 		teleportOn = true
 
 	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):

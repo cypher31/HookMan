@@ -8,23 +8,20 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10.7677 )
+extents = Vector2( 8.82043, 9.79735 )
 
 [node name="Root" type="Node2D"]
-
-transform/pos = Vector2( 0.062561, -73.6703 )
 
 [node name="player" type="KinematicBody2D" parent="."]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 3.14409, 0, 0, 2.96143, 0, 0.152079 )
+shapes/0/transform = Matrix32( 3.14409, 0, 0, 2.96143, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
-__meta__ = { "_edit_group_":true }
 
 [node name="playerSprite" type="Sprite" parent="player"]
 
@@ -39,7 +36,6 @@ transform/pos = Vector2( 0, 45 )
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="player"]
 
-transform/pos = Vector2( 0, 0.152079 )
 transform/scale = Vector2( 3.14409, 2.96143 )
 shape = SubResource( 1 )
 trigger = false
@@ -78,21 +74,16 @@ autostart = false
 
 [node name="bulletsHolder" type="Node" parent="player"]
 
-[node name="hookHolder" type="Node" parent="player"]
-
 [node name="crossHair" type="Node2D" parent="."]
 
-editor/display_folded = true
-transform/pos = Vector2( -0.062561, 73.6703 )
 script/script = ExtResource( 3 )
 
 [node name="crossHairSprite" type="Sprite" parent="crossHair"]
 
-transform/pos = Vector2( 0.062561, -73.6703 )
 transform/scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 4 )
 flip_h = true
 flip_v = true
-modulate = Color( 0, 1, 0.0859375, 1 )
+modulate = Color( 1, 0, 0, 1 )
 
 
