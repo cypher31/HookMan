@@ -7,7 +7,7 @@ var hookHolder
 var bulletLive = false
 var canTeleport = false
 
-onready var hook_scene = preload("res://Hook.tscn")
+onready var hook_scene = preload("res://Scenes/Hook.tscn")
 
 func _fixed_process(delta):
 	hook_position = self.get_global_pos()

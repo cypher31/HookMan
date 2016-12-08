@@ -31,7 +31,7 @@ var teleportOn = false
 var canTeleport = false
 var destroyed = false
 
-onready var bullet_scene = preload("res://bullet_scene.tscn")
+onready var bullet_scene = preload("res://Scenes/bullet_scene.tscn")
 onready var offset = Vector2(0, 0)
 onready var relative_mouse_pos = Vector2(0, 0)
 

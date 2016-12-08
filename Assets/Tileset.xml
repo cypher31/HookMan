@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="TileSet" subresource_count="6" version="2.1" version_name="Godot Engine v2.1.stable.official">
-	<ext_resource path="res://NES - Mega Man 2 - Wood Man Stage.tex" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://Assets/NES - Mega Man 2 - Wood Man Stage.tex" type="Texture" index="0"></ext_resource>
 	<resource type="ConvexPolygonShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="4"> 			912.614, 6.23116, 547.627, 6.06894, 547.627, -14.8569, 913.198, -14.7488 </vector2_array>
@@ -23,8 +23,7 @@
 	</resource>
 	<main_resource>
 		<string name="0/name"> "Tile1" </string>
-		<resource name="0/texture" external="0">  </resource>
-		<vector2 name="0/tex_offset"> 0, 0 </vector2>
+		<resource name="0/texture"></resource>		<vector2 name="0/tex_offset"> 0, 0 </vector2>
 		<resource name="0/material"></resource>		<rect2 name="0/region"> 32, 175, 32, 32 </rect2>
 		<vector2 name="0/occluder_offset"> 16, 16 </vector2>
 		<resource name="0/occluder"></resource>		<vector2 name="0/navigation_offset"> 16, 16 </vector2>
