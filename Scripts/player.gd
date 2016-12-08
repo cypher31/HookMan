@@ -158,7 +158,7 @@ func _input(event):
 		teleportOn = true
 
 	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
-		self.set_pos(bullet.get_node("hookPosition").get_pos())
+		self.set_global_pos(bullet.get_node("hookPosition").get_pos())
 		teleportOn = false
 		canTeleport = false
 		bullet.queue_free()

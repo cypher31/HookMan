@@ -3,8 +3,6 @@
 [ext_resource path="res://Scripts/bulletBody.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Bullet-Bill.tex" type="Texture" id=2]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -17,6 +15,7 @@ transform/scale = Vector2( 0.5, 0.5 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 
+editor/display_folded = true
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 3.07672, 0, 0, 0.897608, 1.77207, 0.258799 )

@@ -15,7 +15,7 @@ func _fixed_process(delta):
 	
 func _on_body_enter(other):
 	
-	hook_position = self.get_pos()
+	hook_position = self.get_global_pos()
 	get_parent().get_node("hookPosition").set_pos(hook_position)
 
 	hookHolder = get_parent().get_node("hookHolder")

@@ -5,14 +5,10 @@
 [ext_resource path="res://Scripts/crosshair.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Crosshair.tex" type="Texture" id=4]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 8.82043, 9.79735 )
+extents = Vector2( 10.0222, 10.8174 )
 
 [node name="Root" type="Node2D"]
 
