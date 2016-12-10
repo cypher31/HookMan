@@ -25,6 +25,12 @@ var prev_jump_pressed = false
 #Shooting constants
 const BULLET_SPEED = 600
 const FIRE_TIME = .4
+var shotCharge = 1
+var mousePositionStart
+var mousePositionCurrent
+var mousePositionEnd
+var playerCurrentRotation
+var drawLine = false
 var timer = 0
 var bullet
 var teleportOn = false
@@ -139,20 +145,36 @@ func _fixed_process(delta):
 	offset = -get_viewport().get_canvas_transform().o * get_node("Camera2D").get_zoom() # Get the offset
 	relative_mouse_pos = get_viewport().get_mouse_pos() * get_node("Camera2D").get_zoom() + offset
 	#have gun look at mouse location
-	get_node("playerSprite").look_at(relative_mouse_pos)
+#	get_node("playerSprite").look_at(relative_mouse_pos)
+	get_node("playerSprite/bulletSpawnPoint").look_at(relative_mouse_pos)
 	#have gun look at mouse location
+	
+	mousePositionCurrent = get_viewport().get_mouse_pos()
 
 func _input(event):
 
 	if (event.is_action_pressed("shoot") && not event.is_echo()):
-
+		mousePositionStart = get_viewport().get_mouse_pos()
+		playerCurrentRotation = get_node("playerSprite/bulletSpawnPoint").get_rot()
+		drawLine = true
+		print(mousePositionStart)
+		
+	if (event.is_action_released("shoot") && not event.is_echo()):
+		mousePositionEnd = get_viewport().get_mouse_pos()
+		var mouseDelta = mousePositionStart - mousePositionEnd
+		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 100
+		drawLine = false
+		print(mousePositionEnd)
+		print(mouseDelta)
+		print(shotCharge)
+		
 		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
 		var bulletSpawnPoint = get_node("playerSprite/bulletSpawnPoint").get_global_pos() #to have objects move independently attach to a "node" (simplest node possible) then instance at that nodes position
 		var bulletHolder = get_node("bulletsHolder")
 		bulletHolder.add_child(bullet)
 		bullet.set_pos(bulletSpawnPoint)
-		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("playerSprite").get_rot() - deg2rad(90)))
+		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED * shotCharge, 0).rotated(playerCurrentRotation - deg2rad(90)))
 		bullet.get_node("RigidBody2D").set_rot(deg2rad(90))
 		bullet.look_at(relative_mouse_pos)
 		teleportOn = true

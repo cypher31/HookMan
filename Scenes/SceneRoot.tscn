@@ -31,6 +31,7 @@ autostart = true
 
 [node name="TileMap" type="TileMap" parent="." groups=[ "terrain" ]]
 
+transform/pos = Vector2( -83.03, -0.902588 )
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 32, 32 )
@@ -49,7 +50,7 @@ tile_data = IntArray( -327674, 1, -327673, 1, -327672, 1, -327671, 1, -327670, 1
 
 [node name="Root" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 32.063, -105.67 )
+transform/pos = Vector2( 21.5546, -92.2059 )
 
 [connection signal="timeout" from="levelTimer/levelTimer" to="levelTimer" method="_on_levelTimer_timeout"]
 

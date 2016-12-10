@@ -6,8 +6,8 @@
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 10.0
-height = 20.0
+radius = 7.73419
+height = 4.25758
 
 [node name="hook" type="Node2D" groups=[ "bullet" ]]
 
@@ -15,7 +15,6 @@ transform/scale = Vector2( 0.5, 0.5 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 3.07672, 0, 0, 0.897608, 1.77207, 0.258799 )
