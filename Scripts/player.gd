@@ -30,6 +30,7 @@ var mousePositionStart
 var mousePositionCurrent
 var mousePositionEnd
 var playerCurrentRotation
+var shotAngle
 var drawLine = false
 var timer = 0
 var bullet
@@ -164,9 +165,8 @@ func _input(event):
 		var mouseDelta = mousePositionStart - mousePositionEnd
 		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 100
 		drawLine = false
-		print(mousePositionEnd)
-		print(mouseDelta)
-		print(shotCharge)
+		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
+		print (shotAngle)
 		
 		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
@@ -174,8 +174,8 @@ func _input(event):
 		var bulletHolder = get_node("bulletsHolder")
 		bulletHolder.add_child(bullet)
 		bullet.set_pos(bulletSpawnPoint)
-		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED * shotCharge, 0).rotated(playerCurrentRotation - deg2rad(90)))
-		bullet.get_node("RigidBody2D").set_rot(deg2rad(90))
+		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED * shotCharge, 0).rotated(shotAngle - deg2rad(90)))
+		bullet.get_node("RigidBody2D").set_rot(deg2rad(270))
 		bullet.look_at(relative_mouse_pos)
 		teleportOn = true
 

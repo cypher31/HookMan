@@ -6,7 +6,7 @@ var lineEndPosition
 func _input(event):
 	
 	if(event.is_action_pressed("shoot")):
-		lineStartPosition = get_parent().get_parent().get_node("crossHair/crossHairSprite").get_pos()
+		lineStartPosition = get_local_mouse_pos()
 
 func _draw():
 	
@@ -17,7 +17,7 @@ func _draw():
 func _process(delta):
 	
 	if(get_parent().drawLine == true):
-		lineEndPosition = get_parent().get_parent().get_node("crossHair/crossHairSprite").get_pos()
+		lineEndPosition = get_local_mouse_pos()
 	update()
 
 func _ready():
