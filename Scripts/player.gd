@@ -31,6 +31,7 @@ var mousePositionCurrent
 var mousePositionEnd
 var playerCurrentRotation
 var shotAngle
+var mouseDelta
 var drawLine = false
 var timer = 0
 var bullet
@@ -158,11 +159,12 @@ func _input(event):
 		mousePositionStart = get_viewport().get_mouse_pos()
 		playerCurrentRotation = get_node("playerSprite/bulletSpawnPoint").get_rot()
 		drawLine = true
+		mouseDelta = mousePositionStart - mousePositionCurrent
 		print(mousePositionStart)
 		
 	if (event.is_action_released("shoot") && not event.is_echo()):
 		mousePositionEnd = get_viewport().get_mouse_pos()
-		var mouseDelta = mousePositionStart - mousePositionEnd
+		mouseDelta = mousePositionStart - mousePositionEnd
 		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 100
 		drawLine = false
 		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
