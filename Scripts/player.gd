@@ -169,7 +169,7 @@ func _input(event):
 	if (event.is_action_released("shoot") && not event.is_echo()):
 		mousePositionEnd = get_viewport().get_mouse_pos()
 		mouseDelta = mousePositionStart - mousePositionEnd
-		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 100
+		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 200
 		drawLine = false
 		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
 		print (shotAngle)
