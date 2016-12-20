@@ -5,13 +5,14 @@ var lineEndPosition
 
 func _input(event):
 	
-	if(event.is_action_pressed("shoot")):
-		lineStartPosition = get_local_mouse_pos()
+#	if(event.is_action_pressed("shoot")):
+#		lineStartPosition = get_local_mouse_pos()
+	pass
 
 func _draw():
 	
 	if(get_parent().drawLine == true):
-		draw_line(lineStartPosition, lineEndPosition, Color(255,0,0), 2)
+		draw_line(get_parent().get_parent().get_node("crossHair").get_pos(), lineEndPosition, Color(255,0,0), 2)
 	
 	pass
 	

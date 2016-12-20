@@ -95,10 +95,10 @@ func _fixed_process(delta):
 		#tile collision logic
 		#for this to work the tile actually needs to be touched, not the collision polygon attached to the tile
 		#also this has to come before the "slide" logic below (I think...)
-		var collidingWith = get_collision_pos()
-		var tile = get_tree().get_current_scene().get_node("TileMap").get_cellv(get_tree().get_current_scene().get_node("TileMap").world_to_map(collidingWith))
-		print(tile)
-		if(tile == 1):
+		var collidingWith = get_collider().get_owner().is_in_group("lava")
+		print(collidingWith)
+#		var tile = get_tree().get_current_scene().get_node("TileMap").get_cellv(get_tree().get_current_scene().get_node("TileMap").world_to_map(collidingWith))
+		if(get_collider().get_owner().is_in_group("lava")):
 			get_tree().reload_current_scene()
 			gameOver = true
 		
@@ -164,7 +164,7 @@ func _input(event):
 		playerCurrentRotation = get_node("playerSprite/bulletSpawnPoint").get_rot()
 		drawLine = true
 		mouseDelta = mousePositionStart - mousePositionCurrent
-		print(mousePositionStart)
+#		print(mousePositionStart)
 		
 	if (event.is_action_released("shoot") && not event.is_echo()):
 		mousePositionEnd = get_viewport().get_mouse_pos()
@@ -172,7 +172,7 @@ func _input(event):
 		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 200
 		drawLine = false
 		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
-		print (shotAngle)
+#		print (shotAngle)
 		
 		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
@@ -190,6 +190,9 @@ func _input(event):
 		teleportOn = false
 		canTeleport = false
 		bullet.queue_free()
+	
+	if(Input.is_key_pressed(KEY_ESCAPE)):
+		get_tree().quit()
 
 func _ready():
 	# Called every time the node is added to the scene.

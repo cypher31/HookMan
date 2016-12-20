@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scripts/player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Simia..tex" type="Texture" id=2]
 [ext_resource path="res://Scripts/shotStrength.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/crosshair.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Crosshair.tex" type="Texture" id=5]
@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10.0222, 10.8174 )
+extents = Vector2( 87.0938, 124.584 )
 
 [node name="playerRoot" type="Node2D"]
 
@@ -17,17 +17,20 @@ extents = Vector2( 10.0222, 10.8174 )
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 3.14409, 0, 0, 2.96143, 0, 0 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-collision/margin = 0.08
+collision/margin = 0.05
 script/script = ExtResource( 1 )
 
 [node name="playerSprite" type="Sprite" parent="player"]
 
 editor/display_folded = true
+transform/pos = Vector2( 29.4037, -11.7615 )
+transform/scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
+flip_h = true
 
 [node name="bulletSpawnPoint" type="Position2D" parent="player/playerSprite"]
 
@@ -35,7 +38,6 @@ texture = ExtResource( 2 )
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="player"]
 
-transform/scale = Vector2( 3.14409, 2.96143 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -46,19 +48,20 @@ offset = Vector2( 0, -100 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 1.5, 1.5 )
 limit/left = -1000000
 limit/top = -10000000
 limit/right = 10000000
 limit/bottom = 10000000
 drag_margin/h_enabled = true
 drag_margin/v_enabled = true
-smoothing/enable = false
+smoothing/enable = true
 smoothing/speed = 5.0
 drag_margin/left = 0.0
 drag_margin/top = 0.0
 drag_margin/right = 0.0
 drag_margin/bottom = 0.0
+__meta__ = { "_edit_lock_":true }
 
 [node name="timerHolder" type="Node" parent="player"]
 
@@ -89,6 +92,7 @@ script/script = ExtResource( 3 )
 
 editor/display_folded = true
 script/script = ExtResource( 4 )
+__meta__ = { "_edit_lock_":true }
 
 [node name="crossHairSprite" type="Sprite" parent="crossHair"]
 
