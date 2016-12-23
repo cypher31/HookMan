@@ -65,12 +65,10 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="timerHolder" type="Node" parent="player"]
 
-editor/display_folded = true
-
 [node name="shootTimer" type="Timer" parent="player/timerHolder"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.25
 one_shot = false
 autostart = false
 
@@ -90,7 +88,6 @@ script/script = ExtResource( 3 )
 
 [node name="crossHair" type="Node2D" parent="."]
 
-editor/display_folded = true
 script/script = ExtResource( 4 )
 __meta__ = { "_edit_lock_":true }
 
@@ -101,5 +98,7 @@ texture = ExtResource( 5 )
 flip_h = true
 flip_v = true
 modulate = Color( 1, 0, 0, 1 )
+
+[connection signal="timeout" from="player/timerHolder/shootTimer" to="player" method="_on_shootTimer_timeout"]
 
 

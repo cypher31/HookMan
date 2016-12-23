@@ -23,9 +23,10 @@ var pull = false
 var prev_jump_pressed = false
 
 #Shooting constants
-const BULLET_SPEED = 600
+const BULLET_SPEED = 3000
 const FIRE_TIME = .4
 var shotCharge = 1
+var canShoot = true
 var mousePositionStart
 var mousePositionCurrent
 var mousePositionEnd
@@ -155,24 +156,14 @@ func _fixed_process(delta):
 	get_node("playerSprite/bulletSpawnPoint").look_at(relative_mouse_pos)
 	#have gun look at mouse location
 	
-	mousePositionCurrent = get_viewport().get_mouse_pos()
-
 func _input(event):
 
-	if (event.is_action_pressed("shoot") && not event.is_echo()):
+	if (event.is_action_pressed("shoot") && not event.is_echo() && canShoot == true):
+		get_node("timerHolder/shootTimer").start()
 		mousePositionStart = get_viewport().get_mouse_pos()
 		playerCurrentRotation = get_node("playerSprite/bulletSpawnPoint").get_rot()
-		drawLine = true
-		mouseDelta = mousePositionStart - mousePositionCurrent
-#		print(mousePositionStart)
-		
-	if (event.is_action_released("shoot") && not event.is_echo()):
-		mousePositionEnd = get_viewport().get_mouse_pos()
-		mouseDelta = mousePositionStart - mousePositionEnd
-		shotCharge = sqrt(mouseDelta.x*mouseDelta.x + mouseDelta.y*mouseDelta.y) / 200
-		drawLine = false
+		mouseDelta = mousePositionStart - get_node("playerSprite/bulletSpawnPoint").get_pos()
 		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
-#		print (shotAngle)
 		
 		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
@@ -180,16 +171,17 @@ func _input(event):
 		var bulletHolder = get_node("bulletsHolder")
 		bulletHolder.add_child(bullet)
 		bullet.set_pos(bulletSpawnPoint)
-		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED * shotCharge, 0).rotated(shotAngle - deg2rad(90)))
+		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(playerCurrentRotation - deg2rad(90)))
 		bullet.get_node("RigidBody2D").set_rot(deg2rad(270))
 		bullet.look_at(relative_mouse_pos)
-		teleportOn = true
+		canShoot = false
+#		teleportOn = true
 
-	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
-		self.set_global_pos(bullet.get_node("hookPosition").get_pos())
-		teleportOn = false
-		canTeleport = false
-		bullet.queue_free()
+#	if (event.is_action_pressed("teleport") && not event.is_echo() && teleportOn == true):
+#		self.set_global_pos(bullet.get_node("hookPosition").get_pos())
+#		teleportOn = false
+#		canTeleport = false
+#		bullet.queue_free()
 	
 	if(Input.is_key_pressed(KEY_ESCAPE)):
 		get_tree().quit()
@@ -201,5 +193,6 @@ func _ready():
 	set_fixed_process(true)
 	pass
 
-
-
+func _on_shootTimer_timeout():
+	canShoot = true
+	pass 

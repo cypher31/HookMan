@@ -10,22 +10,23 @@ var canTeleport = false
 onready var hook_scene = preload("res://Scenes/Hook.tscn")
 
 func _fixed_process(delta):
-	hook_position = self.get_global_pos()
-	get_parent().get_node("hookPosition").set_pos(hook_position)
+#	hook_position = self.get_global_pos()
+#	get_parent().get_node("hookPosition").set_pos(hook_position)
+	pass
 	
 func _on_body_enter(other):
 	
-	hook_position = self.get_global_pos()
-	get_parent().get_node("hookPosition").set_pos(hook_position)
-
-	hookHolder = get_parent().get_node("hookHolder")
-	hookUI = hook_scene.instance()
-	hookHolder.add_child(hookUI)
-	hookUI.set_pos(self.get_pos())
-	
-	canTeleport = true
-	bulletTimeOut = false
-	bulletLive = true
+#	hook_position = self.get_global_pos()
+#	get_parent().get_node("hookPosition").set_pos(hook_position)
+#
+#	hookHolder = get_parent().get_node("hookHolder")
+#	hookUI = hook_scene.instance()
+#	hookHolder.add_child(hookUI)
+#	hookUI.set_pos(self.get_pos())
+#	
+#	canTeleport = true
+#	bulletTimeOut = false
+#	bulletLive = true
 
 	self.queue_free()
 
@@ -39,12 +40,13 @@ func _ready():
 	get_node("bulletLifeTimer").start()
 	pass
 
-func _input(event):
-	if (event.is_action_pressed("shoot")):
-		get_parent().queue_free()
-		
-	if (event.is_action_pressed("teleport")):
-		get_parent().queue_free()
+#func _input(event):
+#	if (event.is_action_pressed("shoot")):
+#		get_parent().queue_free()
+#		
+#	if (event.is_action_pressed("teleport")):
+#		get_parent().queue_free()
+#	pass
 
 func _bullet_Time_Out():
 	self.queue_free()
