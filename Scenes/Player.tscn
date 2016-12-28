@@ -48,7 +48,7 @@ offset = Vector2( 0, -100 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 1.5, 1.5 )
+zoom = Vector2( 2.5, 2.5 )
 limit/left = -1000000
 limit/top = -10000000
 limit/right = 10000000
@@ -70,6 +70,13 @@ __meta__ = { "_edit_lock_":true }
 process_mode = 1
 wait_time = 0.25
 one_shot = false
+autostart = false
+
+[node name="doubleTapTimer" type="Timer" parent="player/timerHolder"]
+
+process_mode = 1
+wait_time = 0.3
+one_shot = true
 autostart = false
 
 [node name="bulletsHolder" type="Node" parent="player"]

@@ -4,12 +4,16 @@ extends KinematicBody2D
 #angle in degrees towards either side that player can consider floor
 const FLOOR_ANGLE_TOLERANCE = 40
 const GRAVITY = 2000
-const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
-const WALK_FORCE = 600
-const STOP_FORCE = 1300
-const JUMP_SPEED = 600
-const JUMP_MAX_AIRBORNE_TIME = 0.05
+const WALK_MIN_SPEED = 200
+const WALK_MAX_SPEED = 1000
+const WALK_FORCE = 2000
+const FLY_MIN_SPEED = 200
+const FLY_MAX_SPEED = 1000
+const FLY_FORCE = 2000
+const BOOST_FORCE = Vector2(500,0)
+const STOP_FORCE = 1000
+const JUMP_SPEED = 1000
+const JUMP_MAX_AIRBORNE_TIME = 10
 
 const SLIDE_STOP_VELOCITY = 1.0 #one pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 #one pixel
@@ -19,6 +23,11 @@ var on_air_time = 100
 var jumping = false
 var charging = false
 var pull = false
+var walk_left
+var walk_right
+var force
+var motion
+var fly
 
 var prev_jump_pressed = false
 
@@ -48,11 +57,12 @@ onready var relative_mouse_pos = Vector2(0, 0)
 var gameOver = false
 
 func _fixed_process(delta):
-	var force = Vector2(0, GRAVITY)
+	force = Vector2(0, GRAVITY)
 	
-	var walk_left = Input.is_action_pressed("move_left")
-	var walk_right = Input.is_action_pressed("move_right")
+	walk_left = Input.is_action_pressed("move_left")
+	walk_right = Input.is_action_pressed("move_right")
 	var jump = Input.is_action_pressed("jump")
+	fly = Input.is_action_pressed("fly")
 	
 	var stop = true
 	
@@ -65,6 +75,11 @@ func _fixed_process(delta):
 			force.x += WALK_FORCE
 			stop = false
 				
+	elif(fly):
+		if (velocity.y >= -FLY_MIN_SPEED and velocity.y < FLY_MAX_SPEED):
+			force.y += FLY_FORCE
+			stop = false
+			
 	if(stop):
 		var vsign = sign(velocity.x)
 		var vlen = abs(velocity.x)
@@ -79,7 +94,7 @@ func _fixed_process(delta):
 	velocity += force * delta
 	
 	#integrate velocity into motion and move
-	var motion = velocity * delta
+	motion = velocity * delta
 		
 	#move and consume motion
 	move(motion)
@@ -162,8 +177,8 @@ func _input(event):
 		get_node("timerHolder/shootTimer").start()
 		mousePositionStart = get_viewport().get_mouse_pos()
 		playerCurrentRotation = get_node("playerSprite/bulletSpawnPoint").get_rot()
-		mouseDelta = mousePositionStart - get_node("playerSprite/bulletSpawnPoint").get_pos()
-		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
+#		mouseDelta = mousePositionStart - get_node("playerSprite/bulletSpawnPoint").get_pos()
+#		shotAngle = atan2(mouseDelta.x, mouseDelta.y)
 		
 		bullet = bullet_scene.instance()
 		var playerPosition = get_node("playerSprite").get_pos()
@@ -185,7 +200,23 @@ func _input(event):
 	
 	if(Input.is_key_pressed(KEY_ESCAPE)):
 		get_tree().quit()
+	
+	if(event.is_action_pressed("move_left")):
+		if(get_node("timerHolder/doubleTapTimer").is_processing()):
+			_double_tap_left()
+		else: 
+			get_node("timerHolder/doubleTapTimer").start()
 
+	if(event.is_action_pressed("move_right")):
+		if(get_node("timerHolder/doubleTapTimer").is_processing()):
+			_double_tap_right()
+		else: 
+			get_node("timerHolder/doubleTapTimer").start()
+
+	if(event.is_action("fly")):
+		if (velocity.y >= -FLY_MIN_SPEED and velocity.y < FLY_MAX_SPEED):
+			force.y += FLY_FORCE
+	
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
@@ -196,3 +227,19 @@ func _ready():
 func _on_shootTimer_timeout():
 	canShoot = true
 	pass 
+
+func _double_tap_left():
+	motion -= BOOST_FORCE
+	#integrate velocity into motion and move
+	#move and consume motion
+	move(motion)
+	velocity.x = 0
+	pass
+	
+func _double_tap_right():
+	motion += BOOST_FORCE
+	#integrate velocity into motion and move
+	#move and consume motion
+	move(motion)
+	velocity.x = 0
+	pass
